@@ -17,16 +17,16 @@ const word = "magnolia";
 const guessedLetters = [];
 
 //Display ● for each letter of the chosen word
-const updateWordInProgress = function (word) {
-    const wordInProgressLetters = [];
+const placeholder = function (word) {
+    const placeholderArray = [];
     for (const letter of word) {
         console.log(letter);
-        wordInProgressLetters.push("●");
+        placeholderArray.push("●");
     }
-    wordInProgress.innerText = wordInProgressLetters.join("");
+    wordInProgress.innerText = placeholderArray.join("");
 }
 
-updateWordInProgress(word);
+placeholder(word);
 
 guessButton.addEventListener("click", function(e) {
     e.preventDefault();
@@ -66,4 +66,16 @@ const makeGuess = function (guess) {
         console.log("guessedLetters array: ", guessedLetters);
     }
     
+};
+
+//show guessed letters
+const displayGuesses = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    //split string into array of letters
+    const wordArray = wordUpper.split("");
+    console.log("wordArray: ", wordArray);
+    if (wordArray.includes(guessedLetters)) {
+        let updatedCharacters = [];
+
+    }
 };
