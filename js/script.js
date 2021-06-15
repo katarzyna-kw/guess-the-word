@@ -24,7 +24,7 @@ const placeholder = function (word) {
         placeholderArray.push("●");
     }
     wordInProgress.innerText = placeholderArray.join("");
-}
+};
 
 placeholder(word);
 
@@ -32,7 +32,6 @@ guessButton.addEventListener("click", function(e) {
     e.preventDefault();
     message.innerText = "";
     const userGuess = letterInput.value;
-    // console.log("userGuess:", userGuess);
     const checkUserGuess = checkGuessInput(userGuess);
     console.log("check input value: ", checkUserGuess);
     if (checkUserGuess) {
@@ -62,10 +61,10 @@ const makeGuess = function (guess) {
     if (guessedLetters.includes(guess)) {
         message.innerText = "You have already guessed that letter. Try again!";
     } else {
-        showGuesses();
-        updateWordInProgress(guessedLetters);
         guessedLetters.push(guess);
         console.log("guessedLetters array: ", guessedLetters);
+        showGuesses();
+        updateWordInProgress(guessedLetters);
     }
     
 };
@@ -92,6 +91,15 @@ const updateWordInProgress = function (guessedLetters) {
         } else {
             updatedCharacters.push("●");
         }
-        wordInProgress.innerText = updatedCharacters.join("");
     }
+    wordInProgress.innerText = updatedCharacters.join("");
+    checkIfGameWon();
 };
+
+//check if player won
+const checkIfGameWon = function () {
+    if (word.toUpperCase() === wordInProgress.innerText) {
+        message.classList.add("win");
+        message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+    }
+;}
