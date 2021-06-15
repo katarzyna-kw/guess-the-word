@@ -1,9 +1,9 @@
 //ul
-const guessedLetters = document.querySelector(".guessed-letters");
+const guessedLettersElement = document.querySelector(".guessed-letters");
 //button
 const guessButton = document.querySelector(".guess");
 //text input guess
-const userGuessesLetter = document.querySelector(".letter");
+const letterInput = document.querySelector(".letter");
 //chosen word appears with ● for letters not yet guessed
 const wordInProgress = document.querySelector(".word-in-progress");
 //number of guesses left
@@ -14,6 +14,7 @@ const message = document.querySelector(".message");
 const playAgainButton = document.querySelector(".play-again hide");
 
 const word = "magnolia";
+const guessedLetters = [];
 
 //Display ● for each letter of the chosen word
 const updateWordInProgress = function (word) {
@@ -29,7 +30,40 @@ updateWordInProgress(word);
 
 guessButton.addEventListener("click", function(e) {
     e.preventDefault();
-    let userGuess = userGuessesLetter.value;
-    console.log("userGuess:", userGuess);
-    userGuessesLetter.value = "";
+    message.innerText = "";
+    const userGuess = letterInput.value;
+    // console.log("userGuess:", userGuess);
+    const checkUserGuess = checkGuessInput(userGuess);
+    console.log("check input value: ", checkUserGuess);
+    if (checkUserGuess) {
+        makeGuess(userGuess);
+    }
+    letterInput.value = "";
 });
+
+//check player's input
+const checkGuessInput = function (input) {
+    const acceptedLetter = /[a-zA-Z]/;
+    const correctionMsg = "Please enter a single letter from A-Z.";
+    if (input.length === 0) {
+        message.innerText = correctionMsg;
+    } else if (input.length > 1) {
+        message.innerText = correctionMsg;
+    } else if (!input.match(acceptedLetter)) {
+        message.innerText = correctionMsg;
+    } else {
+        return input;
+    }
+};
+
+//capture player's input
+const makeGuess = function (guess) {
+    guess = guess.toUpperCase();
+    if (guessedLetters.includes(guess)) {
+        message.innerText = "You have already guessed that letter. Try again!";
+    } else {
+        guessedLetters.push(guess);
+        console.log("guessedLetters array: ", guessedLetters);
+    }
+    
+};
