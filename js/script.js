@@ -12,7 +12,7 @@ const remainingGuessesSpan = document.querySelector(".remaining span");
 //message appears to users after guess
 const message = document.querySelector(".message");
 //button to play again
-const playAgainButton = document.querySelector(".play-again hide");
+const playAgainButton = document.querySelector(".play-again");
 
 //global variables
 let word = "pie";
@@ -128,6 +128,7 @@ const countRemainingGuesses = function (guess) {
   }
   if (remainingGuesses === 0) {
       message.innerText = `Game Over! The word was ${upperWord}.`
+      startOver();
   }
   else if (remainingGuesses === 1) {
       remainingGuessesSpan.innerText = "1 guess";
@@ -142,5 +143,14 @@ const checkIfGameWon = function () {
     if (word.toUpperCase() === wordInProgress.innerText) {
         message.classList.add("win");
         message.innerHTML = `<p class="highlight">You guessed correct the word! Congrats!</p>`;
+        startOver();
     }
 ;}
+
+//hide and show elements on game over
+const startOver = function () {
+        guessButton.classList.add("hide");
+        remainingGuessesElement.classList.add("hide");
+        guessedLettersElement.classList.add("hide");
+        playAgainButton.classList.remove("hide");
+};
