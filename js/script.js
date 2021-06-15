@@ -7,7 +7,8 @@ const letterInput = document.querySelector(".letter");
 //chosen word appears with ● for letters not yet guessed
 const wordInProgress = document.querySelector(".word-in-progress");
 //number of guesses left
-const remainingGuesses = document.querySelector(".remaining");
+const remainingGuessesElement = document.querySelector(".remaining");
+const remainingGuessesSpan = document.querySelector(".remaining span");
 //message appears to users after guess
 const message = document.querySelector(".message");
 //button to play again
@@ -15,6 +16,7 @@ const playAgainButton = document.querySelector(".play-again hide");
 
 const word = "magnolia";
 const guessedLetters = [];
+let remainingGuesses = 8;
 
 //Display ● for each letter of the chosen word
 const placeholder = function (word) {
