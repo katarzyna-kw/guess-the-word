@@ -14,9 +14,30 @@ const message = document.querySelector(".message");
 //button to play again
 const playAgainButton = document.querySelector(".play-again hide");
 
-const word = "pie";
+//global variables
+let word = "pie";
 const guessedLetters = [];
 let remainingGuesses = 8;
+
+const getWord = async function () {
+    const result = await fetch(
+        "https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt"
+        );
+        const words = await result.text();
+        const wordArray = words.split("\n");
+        // console.log("this is word array! ", wordArray);
+        const pullRandomWord = function (wordArray) {
+            const randomWordIndex = Math.floor(Math.random() * wordArray.length);
+            const randomWord = wordArray[randomWordIndex].trim();
+            console.log("random word: ", randomWord);
+            word = randomWord;
+            placeholder(word);
+        }
+    pullRandomWord(wordArray);
+};
+
+getWord();
+
 
 //Display ● for each letter of the chosen word
 const placeholder = function (word) {
@@ -27,8 +48,6 @@ const placeholder = function (word) {
     }
     wordInProgress.innerText = placeholderArray.join("");
 };
-
-placeholder(word);
 
 guessButton.addEventListener("click", function(e) {
     e.preventDefault();
