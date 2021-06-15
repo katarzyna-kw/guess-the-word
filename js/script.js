@@ -14,7 +14,7 @@ const message = document.querySelector(".message");
 //button to play again
 const playAgainButton = document.querySelector(".play-again hide");
 
-const word = "magnolia";
+const word = "pie";
 const guessedLetters = [];
 let remainingGuesses = 8;
 
@@ -66,6 +66,7 @@ const makeGuess = function (guess) {
         guessedLetters.push(guess);
         console.log("guessedLetters array: ", guessedLetters);
         showGuesses();
+        countRemainingGuesses(guess);
         updateWordInProgress(guessedLetters);
     }
     
@@ -96,6 +97,25 @@ const updateWordInProgress = function (guessedLetters) {
     }
     wordInProgress.innerText = updatedCharacters.join("");
     checkIfGameWon();
+};
+
+const countRemainingGuesses = function (guess) {
+  const upperWord = word.toUpperCase();
+  if (!upperWord.includes(guess)) {
+      message.innerText = `Nah, the word does not contain ${guess}.`;
+      remainingGuesses -= 1;
+  } else {
+      message.innerText = `Yes! ${guess} is in the word.`;
+  }
+  if (remainingGuesses === 0) {
+      message.innerText = `Game Over! The word was ${upperWord}.`
+  }
+  else if (remainingGuesses === 1) {
+      remainingGuessesSpan.innerText = "1 guess";
+  }
+  else {
+      remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+  }
 };
 
 //check if player won
