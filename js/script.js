@@ -1,3 +1,9 @@
+// BEDAE5 baby blue
+// EECB27 golden
+// E13239 crimson
+// 1F1762 indigo
+// 253F58 slate
+
 //ul
 const guessedLettersElement = document.querySelector(".guessed-letters");
 //button
